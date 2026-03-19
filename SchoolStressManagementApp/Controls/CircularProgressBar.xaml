@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:drawables="clr-namespace:SchoolStressManagementApp.Drawables"
+             x:Class="SchoolStressManagementApp.Controls.CircularProgressBar"
+             x:Name="this">
+    <GraphicsView x:Name="graphicsView">
+        <GraphicsView.Drawable>
+            <drawables:CircularProgressBarDrawable 
+                Progress="{Binding Progress, Source={x:Reference this}, FallbackValue='50'}"
+                Size="{Binding Size, Source={x:Reference this}, FallbackValue='140'}"
+                Thickness="{Binding Thickness, Source={x:Reference this}, FallbackValue='4'}"
+                ProgressColor="{Binding ProgressColor, Source={x:Reference this}, FallbackValue='Green'}"
+                ProgressLeftColor="{Binding ProgressLeftColor, Source={x:Reference this}, FallbackValue='LightGreen'}"
+                TextColor="{Binding TextColor, Source={x:Reference this}, FallbackValue='DarkGreen'}" />
+        </GraphicsView.Drawable>
+    </GraphicsView>
+</ContentView>

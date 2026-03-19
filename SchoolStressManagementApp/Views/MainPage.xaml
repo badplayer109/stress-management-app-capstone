@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SchoolStressManagementApp.ViewModels"
+             xmlns:controls="clr-namespace:SchoolStressManagementApp.Controls"
+             x:Class="SchoolStressManagementApp.Views.MainPage"
+             x:DataType="viewModels:MainPageViewModel">
+    <Grid>
+        <Image
+            Source="stress_management_background.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+        <ScrollView>
+            <VerticalStackLayout Padding="30" Spacing="25">
+                <controls:CircularProgressBar 
+                    Progress="{Binding StatusOverview}"
+                    Size="220"
+                    Thickness="8"
+                    ProgressColor="Green"
+                    ProgressLeftColor="LightGreen"
+                    TextColor="DarkGreen" />
+
+                <BoxView HeightRequest="2" Color="CornflowerBlue" HorizontalOptions="Fill" />
+
+                <HorizontalStackLayout BackgroundColor="AliceBlue" Padding="10">
+                    <controls:CircularProgressBar x:Name="HydrationStatusCircularBar"
+                        Max="{Binding WaterIntakeOptimal}"
+                        Min="{Binding WaterIntakeInit}"
+                        Value="{Binding WaterIntake}"
+                        Size="100"
+                        Thickness="4"
+                        ProgressColor="DeepSkyBlue"
+                        ProgressLeftColor="LightSkyBlue"
+                        TextColor="MidnightBlue" />
+                    <Grid RowDefinitions="20, 20, *">
+                        <Label Text="Hydration Status" />
+                        <Label Grid.Row="1"
+                            Text="{Binding Value, Source={x:Reference HydrationStatusCircularBar}, StringFormat='Water drank: {0:F0} cups'}" />
+                        <Button Grid.Row="2"
+                            Text="Open Hydration Page" Command="{Binding ToHydrationStatusPageCommand}" />
+                    </Grid>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout BackgroundColor="LightGray" Padding="10">
+                    <controls:CircularProgressBar x:Name="SleepStatusCircularBar"
+                        Max="{Binding SleepHoursOptimal}"
+                        Min="{Binding SleepHoursInit}"
+                        Value="{Binding SleepHours}"
+                        Size="100"
+                        Thickness="4"
+                        ProgressColor="DarkViolet"
+                        ProgressLeftColor="DimGray"
+                        TextColor="Purple" />
+                    <Grid RowDefinitions="20, 20, *">
+                        <Label Text="Sleep Status" />
+                        <Label Grid.Row="1"
+                            Text="{Binding Value, Source={x:Reference SleepStatusCircularBar}, StringFormat='Time Slept: {0:F1} hours'}" />
+                        <Button Grid.Row="2"
+                            Text="Open Sleep Page" Command="{Binding ToSleepStatusPageCommand}" />
+                    </Grid>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout BackgroundColor="Beige" Padding="10"> <!-- The hardcoded string will be given a bindable property in the future not now -->
+                    <controls:CircularProgressBar x:Name="ExerciseGuideCircularBar"
+                        Progress="{Binding ExerciseProgress}"
+                        Size="100"
+                        Thickness="4"
+                        ProgressColor="Gold"
+                        ProgressLeftColor="PaleGoldenrod"
+                        TextColor="Chocolate" />
+                    <Grid RowDefinitions="20, 20, *">
+                        <Label Text="Exercise Status"/>
+                        <Label Grid.Row="1"
+                            Text="{Binding Progress, Source={x:Reference ExerciseGuideCircularBar}, StringFormat='Exercise Progress: {0:F2}%'}" />
+                        <Button Grid.Row="2"
+                            Text="Open Exercise Guide Page" Command="{Binding ToExerciseGuidePageCommand}" />
+                    </Grid>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

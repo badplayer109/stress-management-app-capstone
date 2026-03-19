@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SchoolStressManagementApp.ViewModels"
+             xmlns:controls="clr-namespace:SchoolStressManagementApp.Controls"
+             x:Class="SchoolStressManagementApp.Views.ExerciseGuidePage"
+             Title="ExerciseGuidePage"
+             x:DataType="viewModels:ExerciseGuideViewModel">
+    <Grid>
+        <Image
+            Source="stress_management_background.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+        <ScrollView>
+            <VerticalStackLayout Padding="30" Spacing="25">
+                <controls:DefaultFrame />
+                <controls:CircularProgressBar x:Name="ExerciseGuideCircularBar"
+                    Progress="{Binding Value, Source={x:Reference ExerciseProgressSlider}}"
+                    Size="100"
+                    Thickness="4"
+                    ProgressColor="Gold"
+                    ProgressLeftColor="PaleGoldenrod"
+                    TextColor="Chocolate" />
+                <VerticalStackLayout BackgroundColor="Beige" Padding="10">
+                    <Label Text="Exercise Status"/>
+                    <Label Text="{Binding Progress, Source={x:Reference ExerciseGuideCircularBar}, StringFormat='Exercise Progress: {0:F2}%'}"/>
+                    <Slider x:Name="ExerciseProgressSlider" Value="{Binding ExerciseProgress}" Maximum="100" Minimum="0" />
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+                        <Editor Grid.ColumnSpan="2" Text="{Binding LinkDraft, Mode=TwoWay}"
+                            HeightRequest="30" Placeholder="Place your exercise link here"/>
+                        <Button Grid.Row="1" Text="save"
+                            Command="{Binding SaveLinkCommand}" />
+                        <Button Grid.Row="1" Grid.Column="1" Text="delete"
+                            Command="{Binding DeleteLinkCommand}" />
+                    </Grid>
+                </VerticalStackLayout>
+                <Label  Text="{Binding ExerciseGuideMessage}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
