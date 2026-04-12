@@ -2,26 +2,59 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using SchoolStressManagementApp.Services;
+using SchoolStressManagementApp.Models;
 using SchoolStressManagementApp.Views;
+using System.Collections.ObjectModel;
 
 namespace SchoolStressManagementApp.ViewModels;
 
-public class MainPageViewModel : INotifyPropertyChanged, IDisposable
+public partial class MainPageViewModel : INotifyPropertyChanged
 {
     private readonly GlobalStressManagementStatus _status;
-    public double WaterIntake => _status.WaterIntake;
-    public int WaterIntakeOptimal => _status.WaterIntakeOptimal;
+    
+    private ObservableCollection<HydrationDayModel> HydrationDays => _status.Data.HydrationDays;
+    private ObservableCollection<SleepDayModel> SleepDays => _status.Data.SleepDays;
+    private ObservableCollection<ExerciseDayModel> ExerciseDays => _status.Data.ExerciseDays;
+    public HydrationDayModel HydrationStatusToday { get; set; }
+    public SleepDayModel SleepStatusToday { get; set; }
+    public ExerciseDayModel ExerciseStatusToday { get; set; }
+
+    private double totalExerciseProgress = 0;
+    public double TotalExerciseProgress
+    {
+        get => totalExerciseProgress;
+        set
+        {
+            if (totalExerciseProgress != value)
+            {
+                totalExerciseProgress = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    private int statusOverview;
+    public int StatusOverview
+    {
+        get => statusOverview;
+        set
+        {
+            if (statusOverview != value)
+            {
+                statusOverview = value;
+                OnPropertyChanged();
+            } 
+        }
+    }
+
+    public int WaterIntakeMax { get; } = 16;
+    public int WaterIntakeOptimal { get; }  = 8;
     public int WaterIntakeInit { get; } = 0;
     
-    public double SleepHours => _status.SleepHours;
-    public int SleepHoursOptimal => _status.SleepHoursOptimal;
+    public int SleepHoursMax { get; } = 24;
+    public int SleepHoursOptimal { get; } = 8;
     public int SleepHoursInit { get; } = 0;
 
-    public string ExerciseLink => _status.ExerciseLink;
-    public string ExerciseGuideMessage => _status.ExerciseGuideMessage;
-    public double ExerciseProgress => _status.ExerciseProgress;
-
-    public int StatusOverview => CalculateStatusOverview();
     public ICommand ToHydrationStatusPageCommand { get; }
     public ICommand ToSleepStatusPageCommand { get; }
     public ICommand ToExerciseGuidePageCommand { get; }
@@ -30,32 +63,38 @@ public class MainPageViewModel : INotifyPropertyChanged, IDisposable
     {
         _status = status;
 
-        _status.PropertyChanged += OnStatusPropertyChanged;
-        
         ToHydrationStatusPageCommand = new Command(async () => await ToHydrationStatusPage());
         ToSleepStatusPageCommand = new Command(async () => await ToSleepStatusPage());
         ToExerciseGuidePageCommand = new Command(async () => await ToExerciseGuidePage());
+
+        HydrationStatusToday = HydrationDays.FirstOrDefault(h => h.Date.Date == DateTime.Now.Date) ?? new() { WaterIntake=0 };
+
+        SleepStatusToday = SleepDays.FirstOrDefault(s => s.Date.Date == DateTime.Now.Date) ?? new() { SleepHours=TimeSpan.FromMinutes(0) };
+
+        ExerciseStatusToday = ExerciseDays.FirstOrDefault(e => e.Date.Date == DateTime.Now.Date) ?? new();
+
+        CalculateStatusOverview();
     }
-    
-    private void OnStatusPropertyChanged(Object? sender, PropertyChangedEventArgs e)
+    public void UpdateTotalProgress()
     {
-        if (e.PropertyName == nameof(GlobalStressManagementStatus.WaterIntake)) OnPropertyChanged(nameof(WaterIntake));
-        if (e.PropertyName == nameof(GlobalStressManagementStatus.SleepHours)) OnPropertyChanged(nameof(SleepHours));
-        if (e.PropertyName == nameof(GlobalStressManagementStatus.ExerciseLink)) OnPropertyChanged(nameof(ExerciseLink));
-        if (e.PropertyName == nameof(GlobalStressManagementStatus.ExerciseProgress)) OnPropertyChanged(nameof(ExerciseProgress));
-        OnPropertyChanged(nameof(StatusOverview));
+        TotalExerciseProgress = ExerciseStatusToday.GetExerciseProgress() * 100;
     }
 
-    private int CalculateStatusOverview()
+    private void CalculateStatusOverview()
     {
-        double waterStatus = WaterIntake / WaterIntakeOptimal;
+        UpdateTotalProgress();
+
+        double waterStatus = HydrationStatusToday.WaterIntake / WaterIntakeOptimal;
         if (waterStatus >= 1) waterStatus = 1;
-        double sleepStatus = SleepHours / SleepHoursOptimal;
+
+        double sleepStatus = SleepStatusToday.GetSleepHours / SleepHoursOptimal;
         if (sleepStatus >= 1) sleepStatus = 1;
-        double exerciseStatus = ExerciseProgress / 100;
-        // if (exerciseStatus >= 1) exerciseStatus = 1;
+
+        double exerciseStatus = TotalExerciseProgress;
+        if (exerciseStatus >= 1) exerciseStatus = 1;
+
         double statusOverview = (waterStatus + sleepStatus + exerciseStatus) / 3 * 100;
-        return (int)Math.Round(statusOverview, MidpointRounding.AwayFromZero);
+        StatusOverview = (int)Math.Round(statusOverview, MidpointRounding.AwayFromZero);
     }
 
     private async Task ToHydrationStatusPage()
@@ -71,11 +110,6 @@ public class MainPageViewModel : INotifyPropertyChanged, IDisposable
     private async Task  ToExerciseGuidePage()
     {
         await Shell.Current.GoToAsync($"///{nameof(ExerciseGuidePage)}");
-    }
-
-    public void Dispose()
-    {
-        _status.PropertyChanged -= OnStatusPropertyChanged;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

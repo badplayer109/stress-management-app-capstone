@@ -1,52 +1,126 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using SchoolStressManagementApp.Models;
 using SchoolStressManagementApp.Services;
 using SchoolStressManagementApp.Views;
 
 namespace SchoolStressManagementApp.ViewModels;
 
-public class HydrationStatusViewModel  : INotifyPropertyChanged
+public partial class HydrationStatusViewModel  : TrackerPageViewModelBase<HydrationDayModel>
 {
     private readonly GlobalStressManagementStatus _status;
-    public double WaterIntake 
-    { 
-        get => _status.WaterIntake; 
-        set => _status.WaterIntake = value; 
+    protected override ObservableCollection<HydrationDayModel> Items => _status.Data.HydrationDays;
+    
+    private string waterIntakeDraftText = "0";
+    public string WaterIntakeDraftText
+    {
+        get => waterIntakeDraftText;
+        set
+        {
+            if (waterIntakeDraftText != value)
+            {
+                waterIntakeDraftText = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(WaterIntakeDraft));
+            }
+        }
     }
-    public int WaterIntakeOptimal => _status.WaterIntakeOptimal;
+
+    public double WaterIntakeDraft
+    {
+        get
+        {
+            if (double.TryParse(waterIntakeDraftText, out var parsed))
+                return parsed;
+            return 0;
+        }
+        set
+        {
+            if (Math.Abs(WaterIntakeDraft - value) > double.Epsilon)
+            {
+                waterIntakeDraftText = value.ToString("0");
+                OnPropertyChanged(nameof(WaterIntakeDraftText));
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int WaterIntakeOptimal { get; } = 8;
     public int WaterIntakeInit { get; } = 0;
-    public ICommand ToMainPageCommand { get; }
+    public int WaterIntakeMax { get; } = 16;
+
+    public ICommand RecordToDayCommand { get; }
+    public ICommand ClearDayCommand { get; }
+    
     public HydrationStatusViewModel(GlobalStressManagementStatus status)
     {
         _status = status;
 
-        _status.PropertyChanged += OnStatusPropertyChanged;
-
-        ToMainPageCommand = new Command(async () => await ToMainPage());
-    }
-    
-    private async Task ToMainPage()
-    {
-        await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+        RecordToDayCommand = new Command(RecordToDay);
+        ClearDayCommand = new Command(ClearDay);
+        
+        SelectToday();
     }
 
-    private void OnStatusPropertyChanged(Object? sender, PropertyChangedEventArgs e)
+    protected override void LoadOrCreateDay()
     {
-        if (e.PropertyName == nameof(GlobalStressManagementStatus.WaterIntake)) OnPropertyChanged(nameof(WaterIntake));
-        // if (e.PropertyName == nameof(GlobalStressManagementStatus.ExerciseProgress)) OnPropertyChanged(nameof(ExerciseProgress));
-        // OnPropertyChanged(nameof(StatusOverview));
+        if (SelectedDate == null)
+        {
+            CurrentDay = null;
+            return;
+        }
+
+        var existing = Items.FirstOrDefault(x => x.Date.Date == SelectedDate.Value.Date);
+
+        if (existing != null)
+        {
+            CurrentDay = existing;
+            WaterIntakeDraft = CurrentDay.WaterIntake;
+        }
+        else
+        {
+            CurrentDay = new HydrationDayModel
+            {
+                Date = SelectedDate.Value,
+            };
+            WaterIntakeDraft = 0;
+        }
     }
 
-    public void Dispose()
+    private async void RecordToDay()
     {
-        _status.PropertyChanged -= OnStatusPropertyChanged;
+        if (CurrentDay == null) return;
+
+        if (WaterIntakeDraft != 0)
+        {
+            // Make the DayModel an item in Items if not found.
+            if (!Items.Any(d => d.Date.Date == CurrentDay.Date.Date))
+                Items.Add(CurrentDay);
+
+            var existing = Items.FirstOrDefault(d => d.Date.Date == CurrentDay.Date.Date);
+
+            existing?.WaterIntake = WaterIntakeDraft;
+        }
+        else
+        {
+            // if 0, then Remove item in Items if found.
+            if (Items.Any(d => d.Date.Date == CurrentDay.Date.Date))
+                Items.Remove(CurrentDay);
+        }
+
+        UpdateCurrentDay();
+        await _status.SaveAsync();
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected void OnPropertyChanged(string? propertyName = null)
+    private async void ClearDay()
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        if (CurrentDay == null) return;
+
+        CurrentDay.WaterIntake = 0;
+        
+        Items.Remove(CurrentDay);
+        
+        UpdateCurrentDay();
+        await _status.SaveAsync();
     }
 }

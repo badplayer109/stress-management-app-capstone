@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SchoolStressManagementApp.Controls"
-             x:Class="SchoolStressManagementApp.Views.HydrationStatusPage"
              xmlns:viewModels="clr-namespace:SchoolStressManagementApp.ViewModels"
+             x:Class="SchoolStressManagementApp.Views.HydrationStatusPage"
              Title="HydrationStatusPage"
              x:DataType="viewModels:HydrationStatusViewModel">
+             
     <Grid>
         <Image
             Source="stress_management_background.png"
@@ -13,23 +14,72 @@
             HorizontalOptions="Center"
             VerticalOptions="Center" />
         <ScrollView>
-            <VerticalStackLayout Padding="30" Spacing="25">
+            <VerticalStackLayout Padding="15" Spacing="25">
                 <controls:DefaultFrame />
-                <controls:CircularProgressBar x:Name="HydrationStatusCircularBar"
-                    Max="{Binding WaterIntakeOptimal}"
-                    Min="{Binding WaterIntakeInit}"
-                    Value="{Binding Value, Source={x:Reference WaterIntakeSlider}}"
-                    Size="220"
-                    Thickness="8"
-                    ProgressColor="DeepSkyBlue"
-                    ProgressLeftColor="LightSkyBlue"
-                    TextColor="MidnightBlue" />
-                <Grid BackgroundColor="AliceBlue" Padding="10" RowDefinitions="20, 20, 40">
-                    <Label Text="Hydration Status"/>
-                    <Label Grid.Row="1"
-                        Text="{Binding Value, Source={x:Reference HydrationStatusCircularBar}, StringFormat='Water drank: {0:F0} cups'}" />
-                    <Slider x:Name="WaterIntakeSlider" Grid.Row="2" Value="{Binding WaterIntake}" Maximum="16" Minimum="0" />
-                </Grid>
+                <Border Background="AliceBlue" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
+                </Border.Shadow>
+                    <VerticalStackLayout>
+                        <Label Text="Hydration Status Control Panel" FontSize="25" HorizontalOptions="Center" />
+                        <Label Margin="0,25,0,10" FontSize="20"
+                            Text="{Binding CurrentDay.Date, StringFormat='Record to: {0:MMMM dd, yyyy}', FallbackValue='Record to: Select a Date'}" />
+                        <controls:CircularProgressBar x:Name="HydrationStatusCircularBar" Margin="0,15,0,0"
+                            Max="{Binding WaterIntakeOptimal}"
+                            Min="{Binding WaterIntakeInit}"
+                            Value="{Binding WaterIntakeDraft}"
+                            Size="180"
+                            Thickness="10"
+                            ProgressColor="DeepSkyBlue"
+                            ProgressLeftColor="LightSkyBlue"
+                            TextColor="MidnightBlue" />
+                        <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*">
+                            <Label Text="Water Drank" Grid.Row="0" VerticalOptions="Center"/>
+                            <Entry Text="{Binding WaterIntakeDraftText, Mode=TwoWay}"
+                                Keyboard="Numeric" Placeholder="Type here" Grid.Row="0" Grid.Column="1" />
+                            <Slider x:Name="WaterIntakeSlider" Grid.Row="1" Grid.ColumnSpan="2"
+                                Value="{Binding WaterIntakeDraft}" Maximum="{Binding WaterIntakeMax}" Minimum="{Binding WaterIntakeInit}" />
+                            <Label Text="Min 1 cup" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Start" Margin="0,0,0,25" />
+                            <Label Text="Ideal 8 cup" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,25" />
+                            <Label Text="Max 16 cup" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="End" Margin="0,0,0,25" />
+                            <Button Grid.Row="3" Grid.Column="0"
+                                Text="Clear Day" Command="{Binding ClearDayCommand}" />
+                            <Button Grid.Row="3" Grid.Column="2"
+                                Text="Record to Day" Command="{Binding RecordToDayCommand}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Background="AliceBlue" Padding="10">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
+                </Border.Shadow>
+                    <VerticalStackLayout>
+                        <Border Stroke="PaleGoldenrod"
+                                StrokeThickness="4"
+                                Padding="5" Margin="0,10">
+                            <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" Margin="10,5">
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center"
+                                    Text="Day Hydration Status Information"
+                                    FontSize="18" />
+                                <Label Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,15,0,3"
+                                    Text="{Binding CurrentDay.Date, StringFormat='{0:MMMM dd, yyyy}', FallbackValue='Select a Date'}" />
+                                <Label Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center"
+                                    Text="Water Drank" />
+                                <Label Grid.Row="2" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"
+                                    Text="{Binding CurrentDay.WaterIntake, StringFormat='{0:F0} cups', FallbackValue='__ cups'}"/>
+                            </Grid>
+                        </Border>
+                        <Label Text="Date Selector" FontSize="25" HorizontalOptions="Center" />
+                        <controls:CalendarView SelectedDate="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectedDate}" />
+                    </VerticalStackLayout>
+                </Border>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

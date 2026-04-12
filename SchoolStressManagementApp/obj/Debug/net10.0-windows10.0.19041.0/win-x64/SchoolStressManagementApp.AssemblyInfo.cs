@@ -10,17 +10,17 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PackageName", "com.companyname.schoolstressmanagementapp")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PackageName", "com.fieldtripping.schoolstressmanagementapp")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PublisherName", "User Name")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Name", "SchoolStressManagementApp")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Version", "0.1.0.1")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Name", "Stress Manager")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Version", "0.1.1.1")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SchoolStressManagementApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.0")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.1+0c5a983ee11a4a3cd06b562bbec554b167ab3457")]
 [assembly: System.Reflection.AssemblyProductAttribute("SchoolStressManagementApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SchoolStressManagementApp")]
-[assembly: System.Reflection.AssemblyVersionAttribute("0.1.0.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("0.1.1.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows10.0.19041.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows10.0.17763.0")]
 

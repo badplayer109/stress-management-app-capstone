@@ -1,77 +1,81 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using System.Text.Json;
+using SchoolStressManagementApp.Models;
 
 namespace SchoolStressManagementApp.Services;
 
-public class GlobalStressManagementStatus : INotifyPropertyChanged
+public class GlobalStressManagementStatus
 {
-    private double _waterIntake;
-    public int WaterIntakeOptimal = 8;
+    private const string FileName = "appdata.json";
+    private readonly string _filePath;
+    private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-    public double WaterIntake 
+    public StressManagementStatusData Data { get; private set; } = new();
+
+    public GlobalStressManagementStatus()
     {
-        get { return _waterIntake; }
-        set
+        _filePath = Path.Combine(FileSystem.AppDataDirectory, FileName);
+    }
+
+    public async Task LoadAsync()
+    {
+        await _semaphore.WaitAsync();
+
+        try
         {
-            if (value != _waterIntake)
-            {
-                _waterIntake = value;
-                OnPropertyChanged();
-            }
+            if (!File.Exists(_filePath))
+                return;
+
+            string json = await File.ReadAllTextAsync(_filePath);
+
+            var loaded = JsonSerializer.Deserialize<StressManagementStatusData>(json);
+
+            if (loaded == null)
+                return;
+
+            Data.HydrationDays.Clear();
+            foreach (var item in loaded.HydrationDays)
+                Data.HydrationDays.Add(item);
+
+            Data.SleepDays.Clear();
+            foreach (var item in loaded.SleepDays)
+                Data.SleepDays.Add(item);
+
+            Data.ExerciseDays.Clear();
+            foreach (var item in loaded.ExerciseDays)
+                Data.ExerciseDays.Add(item);
+
+            Data.ExercisePlans.Clear();
+            foreach (var item in loaded.ExercisePlans)
+                Data.ExercisePlans.Add(item);
+        }
+        catch (Exception ex) 
+        {
+            // Catch-all for other issues (e.g., null strings, IO errors)
+            Debug.WriteLine($"General Error: {ex.Message}");
+        }
+        finally
+        {
+            _semaphore.Release();
         }
     }
 
-    private double _sleepHours;
-    public int SleepHoursOptimal = 8;
-
-    public double SleepHours 
+    public async Task SaveAsync()
     {
-        get { return _sleepHours; }
-        set
+        await _semaphore.WaitAsync();
+        try
         {
-            if (value != _sleepHours)
-            {
-                _sleepHours = value;
-                OnPropertyChanged();
-            }
+            string json = JsonSerializer.Serialize(Data);
+            await File.WriteAllTextAsync(_filePath, json);
         }
-    }
-
-    private string _exerciseLink = "";
-    private double _exerciseProgress;
-
-    public string ExerciseLink 
-    {
-        get { return _exerciseLink; }
-        set
+        catch (Exception ex) 
         {
-            if (value != _exerciseLink)
-            {
-                _exerciseLink = value;
-                OnPropertyChanged();
-            }
+            // Catch-all for other issues (e.g., null strings, IO errors)
+            Debug.WriteLine($"Save Error: {ex.Message}");
         }
-    }
-
-    public double ExerciseProgress 
-    {
-        get { return _exerciseProgress; }
-        set
+        finally
         {
-            if (value != _exerciseProgress)
-            {
-                _exerciseProgress = value;
-                OnPropertyChanged();
-            }
+            _semaphore.Release();
         }
-    }
-    
-    public string ExerciseGuideMessage = "coming soon exercise scheduler...";
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

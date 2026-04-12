@@ -23,14 +23,19 @@ public static class MauiProgram
 #endif
 		
 		builder.Services.AddSingleton<GlobalStressManagementStatus>();
+
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<HydrationStatusViewModel>();
 		builder.Services.AddTransient<SleepStatusViewModel>();
-		builder.Services.AddTransient<ExerciseGuideViewModel>();
+		builder.Services.AddSingleton<ExerciseGuideViewModel>();
+		// builder.Services.AddTransient<StressCheckInViewModel>();
+
 		builder.Services.AddTransient<MainPage>();
 		builder.Services.AddTransient<HydrationStatusPage>();
 		builder.Services.AddTransient<SleepStatusPage>();
 		builder.Services.AddTransient<ExerciseGuidePage>();
+		builder.Services.AddTransient<ExercisePlansPage>();
+		// builder.Services.AddTransient<StressCheckInPage>();
 
 		return builder.Build();
 	}

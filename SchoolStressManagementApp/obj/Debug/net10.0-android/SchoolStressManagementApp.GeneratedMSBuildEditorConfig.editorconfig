@@ -6,7 +6,7 @@ build_property.IncludeAllContentForSelfExtract =
 build_property.VerifyReferenceTrimCompatibility = 
 build_property.VerifyReferenceAotCompatibility = 
 build_property.MauiXamlNoWarn = 
-build_property.EnableMauiXamlDiagnostics = True
+build_property.EnableMauiXamlDiagnostics = true
 build_property.MauiXamlLineInfo = 
 build_property.Configuration = Debug
 build_property.TargetFramework = net10.0-android
@@ -41,6 +41,16 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SchoolStressManagementApp.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+build_metadata.AdditionalFiles.Inflator = Runtime
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/Acer/Documents/(12Research)/Capstone Project/Stress Management App/SchoolStressManagementApp/Controls/CalendarView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SchoolStressManagementApp.Controls.CalendarView.xaml
+build_metadata.AdditionalFiles.TargetPath = Controls\CalendarView.xaml
+build_metadata.AdditionalFiles.RelativePath = Controls\CalendarView.xaml
 build_metadata.AdditionalFiles.Inflator = Runtime
 build_metadata.AdditionalFiles.NoWarn = 
 build_metadata.AdditionalFiles.EnableDiagnostics = 
@@ -96,6 +106,16 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
+[C:/Users/Acer/Documents/(12Research)/Capstone Project/Stress Management App/SchoolStressManagementApp/Views/ExercisePlansPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SchoolStressManagementApp.Views.ExercisePlansPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ExercisePlansPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ExercisePlansPage.xaml
+build_metadata.AdditionalFiles.Inflator = Runtime
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
 [C:/Users/Acer/Documents/(12Research)/Capstone Project/Stress Management App/SchoolStressManagementApp/Views/HydrationStatusPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SchoolStressManagementApp.Views.HydrationStatusPage.xaml
@@ -121,6 +141,16 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SchoolStressManagementApp.Views.SleepStatusPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\SleepStatusPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\SleepStatusPage.xaml
+build_metadata.AdditionalFiles.Inflator = Runtime
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/Acer/Documents/(12Research)/Capstone Project/Stress Management App/SchoolStressManagementApp/Views/StressCheckInPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SchoolStressManagementApp.Views.StressCheckInPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\StressCheckInPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\StressCheckInPage.xaml
 build_metadata.AdditionalFiles.Inflator = Runtime
 build_metadata.AdditionalFiles.NoWarn = 
 build_metadata.AdditionalFiles.EnableDiagnostics = 

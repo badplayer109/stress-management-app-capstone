@@ -19,13 +19,13 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>SchoolStressManagementApp</ApplicationTitle>
+		<ApplicationTitle>Stress Manager</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.schoolstressmanagementapp</ApplicationId>
+		<ApplicationId>com.fieldtripping.schoolstressmanagementapp</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>0.1.1</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
@@ -40,14 +40,14 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="GhostWhite" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="GhostWhite" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<MauiImage Update="Resources\Images\stress_management_face.svg" Resize="True" BaseSize="300,185" />
 		
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -62,6 +62,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Converters\" />
 	  <Folder Include="Drawables\" />
 	  <Folder Include="Models\" />
 	  <Folder Include="Services\" />

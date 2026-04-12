@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SchoolStressManagementApp.ViewModels"
+             xmlns:models="clr-namespace:SchoolStressManagementApp.Models"
+             xmlns:controls="clr-namespace:SchoolStressManagementApp.Controls"
+             x:Class="SchoolStressManagementApp.Views.ExercisePlansPage"
+             Title="ExercisePlansPage"
+             x:DataType="viewModels:ExerciseGuideViewModel">
+    <Grid>
+        <Image
+            Source="stress_management_background.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+        <ScrollView>
+            <VerticalStackLayout Margin="15">
+                <Button Text="Back to Journaling" Command="{Binding ToExerciseGuidePageCommand}" Margin="0,0,0,10"/>
+                <!-- Exercise Plan Editing -->
+                <Grid RowDefinitions="*,*,*,*,*,*,*,*" ColumnDefinitions="Auto,*" Background="Beige" Padding="10">
+                    <Border Stroke="PaleGoldenrod"
+                            StrokeThickness="4"
+                            Padding="5" Grid.ColumnSpan="2" HorizontalOptions="Fill">
+                        <Label HorizontalOptions="Center"
+                            Text="Exercise Plan Editor"
+                            FontSize="20" />
+                    </Border>
+                    <Label Grid.Row="1" VerticalOptions="Center"
+                        Text="Title" />
+                    <Entry Grid.Row="1" Grid.Column="1"
+                        Text="{Binding TitleDraft}"
+                        Placeholder="Title Required" />
+
+                    <Label Grid.Row="2" VerticalOptions="Center"
+                        Text="Link" />
+                    <Entry Grid.Row="2" Grid.Column="1"
+                        Text="{Binding LinkDraft}"
+                        Placeholder="Link" />
+                    
+                    <Label Grid.Row="3" VerticalOptions="Center"
+                        Text="Exercise Intensity  " />
+                    <Picker Grid.Row="3" Grid.Column="1" 
+                        Title="Select Intensity"
+                        ItemsSource="{Binding Intensities}"
+                        SelectedItem="{Binding TargetIntensityDraft, FallbackValue='{x:Static models:ExerciseIntensity.None}'}" />
+
+                    <Label Grid.Row="4" VerticalOptions="Center"
+                        Text="Target Time"/>
+                    <TimePicker Grid.Row="4" Grid.Column="1"
+                        Format="HH:mm"
+                        Time="{Binding TargetMinutesDraft}" />
+
+                    <Editor Grid.Row="5" Grid.ColumnSpan="2"
+                        Text="{Binding NotesDraft}"
+                        Placeholder="Enter Description/Notes" />
+                <Label Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="Fill" Padding="10" 
+                    Text="Make sure you save with a Target Intensity and Title"/>
+                    <Button Grid.Row="7" Grid.ColumnSpan="2"
+                        Text="Save Plan"
+                        Command="{Binding SavePlanCommand}" />
+                </Grid>
+                
+                <!-- Exercise Plan Selector -->
+                <VerticalStackLayout Background="Beige" Margin="0,10,0,0">
+                    <Button Text="Clear Selected Plan" Command="{Binding ClearPlanCommand}" Margin="10" />
+                </VerticalStackLayout>
+
+                <CollectionView ItemsSource="{Binding Plans}"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedPlan}"
+                                Background="Beige"
+                                Margin="0,0,0,10"
+                                MinimumHeightRequest="120"
+                                MaximumHeightRequest="500">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ExercisePlanModel">
+                            <Border Stroke="PaleGoldenrod"
+                                    StrokeThickness="4"
+                                    Padding="5"
+                                    Margin="5,0">
+                                <Grid RowDefinitions="*,*,*" ColumnDefinitions="Auto,*,80" Padding="5" ColumnSpacing="5">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" Grid.ColumnSpan="2" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Id}" HorizontalOptions="End" />
+                                    <Button Grid.Row="0" Grid.Column="2" Text="Delete" Padding="5" MinimumHeightRequest="0" Grid.RowSpan="2"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeletePlanCommand}"
+                                        CommandParameter="{Binding}" />
+                                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding ExerciseLink}" />
+                                    <Label Grid.Row="2" Grid.Column="0" Text="{Binding TargetIntensity}" />
+                                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding TargetMinutes, StringFormat='Target Time: {0:%h\\h\\ %m\\m}', FallbackValue='Target Time: null'}" Margin="5,0" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Border Stroke="LightGray"
+                                StrokeThickness="4"
+                                Padding="5"
+                                Margin="10">
+                            <Label Text="Create and Edit Exercise Plans in the Plans Page" />
+                        </Border>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

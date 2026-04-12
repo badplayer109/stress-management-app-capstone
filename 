@@ -1,0 +1,188 @@
+Revert "Ready Prototype"
+
+This reverts commit b0cd540f89a503c7a8a57b2f0cc9024c40e0a0ab.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   SchoolStressManagementApp/App.xaml.cs
+#	modified:   SchoolStressManagementApp/AppShell.xaml
+#	deleted:    SchoolStressManagementApp/Controls/CalendarView.xaml
+#	deleted:    SchoolStressManagementApp/Controls/CalendarView.xaml.cs
+#	modified:   SchoolStressManagementApp/Controls/DefaultFrame.xaml
+#	deleted:    SchoolStressManagementApp/Converters/DoubleStringConverter.cs
+#	deleted:    SchoolStressManagementApp/Converters/TimeSpanToAmPmConverter.cs
+#	modified:   SchoolStressManagementApp/MauiProgram.cs
+#	deleted:    SchoolStressManagementApp/Models/CalendarDay.cs
+#	deleted:    SchoolStressManagementApp/Models/CalendarWeek.cs
+#	deleted:    SchoolStressManagementApp/Models/ExerciseDayModel.cs
+#	deleted:    SchoolStressManagementApp/Models/ExerciseIntensity.cs
+#	deleted:    SchoolStressManagementApp/Models/ExercisePlanModel.cs
+#	deleted:    SchoolStressManagementApp/Models/HydrationDayModel.cs
+#	deleted:    SchoolStressManagementApp/Models/IPAQWeekSummary.cs
+#	deleted:    SchoolStressManagementApp/Models/SleepDayModel.cs
+#	deleted:    SchoolStressManagementApp/Models/StressManagementStatusData.cs
+#	deleted:    SchoolStressManagementApp/Models/TrackerDayBase.cs
+#	modified:   SchoolStressManagementApp/Resources/AppIcon/appicon.svg
+#	new file:   SchoolStressManagementApp/Resources/AppIcon/appiconfg.svg
+#	deleted:    SchoolStressManagementApp/Resources/Images/right_arrow_button.svg
+#	new file:   SchoolStressManagementApp/Resources/Images/stress_management_background.png
+#	deleted:    SchoolStressManagementApp/Resources/Images/stress_management_background.svg
+#	deleted:    SchoolStressManagementApp/Resources/Images/stress_management_face.svg
+#	modified:   SchoolStressManagementApp/Resources/Splash/splash.svg
+#	modified:   SchoolStressManagementApp/SchoolStressManagementApp.csproj
+#	modified:   SchoolStressManagementApp/Services/GlobalStressManagementStatus.cs
+#	deleted:    SchoolStressManagementApp/ViewModels/CalendarViewModel.cs
+#	modified:   SchoolStressManagementApp/ViewModels/ExerciseGuideViewModel.cs
+#	modified:   SchoolStressManagementApp/ViewModels/HydrationStatusViewModel.cs
+#	modified:   SchoolStressManagementApp/ViewModels/MainPageViewModel.cs
+#	modified:   SchoolStressManagementApp/ViewModels/SleepStatusViewModel.cs
+#	deleted:    SchoolStressManagementApp/ViewModels/StressCheckInViewModel.cs
+#	deleted:    SchoolStressManagementApp/ViewModels/TrackerPageViewModelBase.cs
+#	modified:   SchoolStressManagementApp/Views/ExerciseGuidePage.xaml
+#	modified:   SchoolStressManagementApp/Views/ExerciseGuidePage.xaml.cs
+#	deleted:    SchoolStressManagementApp/Views/ExercisePlansPage.xaml
+#	deleted:    SchoolStressManagementApp/Views/ExercisePlansPage.xaml.cs
+#	modified:   SchoolStressManagementApp/Views/HydrationStatusPage.xaml
+#	modified:   SchoolStressManagementApp/Views/HydrationStatusPage.xaml.cs
+#	modified:   SchoolStressManagementApp/Views/MainPage.xaml
+#	modified:   SchoolStressManagementApp/Views/MainPage.xaml.cs
+#	modified:   SchoolStressManagementApp/Views/SleepStatusPage.xaml
+#	modified:   SchoolStressManagementApp/Views/SleepStatusPage.xaml.cs
+#	deleted:    SchoolStressManagementApp/Views/StressCheckInPage.xaml
+#	deleted:    SchoolStressManagementApp/Views/StressCheckInPage.xaml.cs
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/SchoolStressManagementApp.AssemblyInfo.cs
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/SchoolStressManagementApp.AssemblyInfoInputs.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/SchoolStressManagementApp.GeneratedMSBuildEditorConfig.editorconfig
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/SchoolStressManagementApp.assets.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/SchoolStressManagementApp.csproj.AssemblyReference.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/SchoolStressManagementApp.csproj.FileListAbsolute.txt
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/android-x64/SchoolStressManagementApp.assets.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/android-x64/SchoolStressManagementApp.csproj.AssemblyReference.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/designtime/R.txt
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/designtime/_Microsoft.Android.Resource.Designer.dll
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/designtime/build.props
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/designtime/libraryimports.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/designtime/libraryprojectimports.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/diagnostics/fastdeploy.json
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/ld.libxamarin-app.x86_64.rsp
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/101/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/102/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/103/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/104/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/105/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/108/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/109/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/110/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/111/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/112/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/113/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/115/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/116/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/117/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/119/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/121/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/123/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/124/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/125/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/126/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/127/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/128/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/129/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/130/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/131/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/132/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/133/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/135/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/136/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/137/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/138/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/139/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/140/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/141/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/142/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/143/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/144/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/145/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/146/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/148/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/151/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/152/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/154/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/155/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/156/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/157/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/158/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/159/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/160/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/163.stamp
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/163/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/164/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/165.stamp
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/165/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/166.stamp
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/166/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/169/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/lp/98/jl/res.zip
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/mauiimage.inputs
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/mauiimage.outputs
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/mauisplash.inputs
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/drawable-hdpi/dotnet_bot.png
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/drawable-mdpi/dotnet_bot.png
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/drawable-xhdpi/dotnet_bot.png
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/drawable-xxhdpi/dotnet_bot.png
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/drawable-xxxhdpi/dotnet_bot.png
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/drawable/stress_management_background.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-hdpi/appicon.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-hdpi/appicon_background.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-hdpi/appicon_foreground.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-hdpi/appicon_round.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-mdpi/appicon.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-mdpi/appicon_background.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-mdpi/appicon_foreground.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-mdpi/appicon_round.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xhdpi/appicon.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xhdpi/appicon_background.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xhdpi/appicon_foreground.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xhdpi/appicon_round.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxhdpi/appicon.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxhdpi/appicon_background.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxhdpi/appicon_foreground.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxhdpi/appicon_round.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxxhdpi/appicon.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_background.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_foreground.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_round.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-hdpi/splash.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-mdpi/splash.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-xhdpi/splash.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-xxhdpi/splash.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-xxxhdpi/splash.png
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-android/resizetizer/sp/values/maui_colors.xml
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/SchoolStressManagementApp.AssemblyInfo.cs
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/SchoolStressManagementApp.AssemblyInfoInputs.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/SchoolStressManagementApp.GeneratedMSBuildEditorConfig.editorconfig
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/SchoolStressManagementApp.assets.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/SchoolStressManagementApp.csproj.AssemblyReference.cache
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/SchoolStressManagementApp.csproj.FileListAbsolute.txt
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/apphost.exe
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/embed/Platforms/Windows/App.xbf
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/embed/embed.resfiles
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/embed/embed.resfiles.intermediate
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/input.json
+#	new file:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/intermediatexaml/SchoolStressManagementApp.dll
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/mauiimage.inputs
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/mauisplash.inputs
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/output.json
+#	modified:   SchoolStressManagementApp/obj/Debug/net10.0-windows10.0.19041.0/win-x64/resizetizer/m/Package.appxmanifest
+#	modified:   SchoolStressManagementApp/obj/SchoolStressManagementApp.csproj.nuget.dgspec.json
+#	modified:   SchoolStressManagementApp/obj/SchoolStressManagementApp.csproj.nuget.g.props
+#	modified:   SchoolStressManagementApp/obj/SchoolStressManagementApp.csproj.nuget.g.targets
+#	modified:   SchoolStressManagementApp/obj/project.assets.json
+#	modified:   SchoolStressManagementApp/obj/project.nuget.cache
+#	deleted:    bugreport-sdk_gphone64_x86_64-BE4B.251210.005-2026-03-21-12-54-58.zip
+#

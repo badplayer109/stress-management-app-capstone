@@ -13,24 +13,31 @@
             ContentTemplate="{DataTemplate views:MainPage}"
             Route="MainPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Hydration Status" Icon="hydration_status_icon.png">
+    <FlyoutItem Title="Hydration Status" Icon="hydration_status_icon.png" Route="HydrationStatusPage">
         <ShellContent
-            Title="Home"
+            Title="Hydration Status"
             ContentTemplate="{DataTemplate views:HydrationStatusPage}"
-            Route="HydrationStatusPage" />
+             />
     </FlyoutItem>
-    <FlyoutItem Title="Sleep Status" Icon="sleep_status_icon.png">
+    <FlyoutItem Title="Sleep Status" Icon="sleep_status_icon.png" Route="SleepStatusPage">
         <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate views:SleepStatusPage}"
-            Route="SleepStatusPage" />
+            Title="Sleep Status"
+            ContentTemplate="{DataTemplate views:SleepStatusPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Exercise Guide" Icon="exercise_guide_icon.png">
         <ShellContent
-            Title="Home"
+            Title="Exercise Guide"
             ContentTemplate="{DataTemplate views:ExerciseGuidePage}"
             Route="ExerciseGuidePage" />
+        <ShellContent
+            Title="Exercise Plans"
+            ContentTemplate="{DataTemplate views:ExercisePlansPage}"
+            Route="ExercisePlansPage" />
     </FlyoutItem>
-    
+    <!-- <FlyoutItem Title="Stress Check In Page" Icon="dotnet_bot.png" Route="StressCheckInPage">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate views:StressCheckInPage}" />
+    </FlyoutItem> -->
 
 </Shell>
