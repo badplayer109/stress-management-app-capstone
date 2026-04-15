@@ -20,13 +20,7 @@
         <ScrollView>
             <VerticalStackLayout Padding="15" Spacing="25">
                 <controls:DefaultFrame />
-                <Border Background="LightGray" Padding="15">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
+                <Border Padding="15" Background="{AppThemeBinding Light={StaticResource SleepSurfaceLight}, Dark={StaticResource SleepSurfaceDark}}" Style="{StaticResource CardStyle}">
                     <VerticalStackLayout>
                         <Label Text="Sleep Status Control Panel" FontSize="25" HorizontalOptions="Center" />
                         <Label Margin="0,25,0,10" FontSize="20"
@@ -37,9 +31,9 @@
                             Value="{Binding GetSleepHoursDraft}"
                             Size="180"
                             Thickness="10"
-                            ProgressColor="DarkViolet"
-                            ProgressLeftColor="DimGray"
-                            TextColor="Purple"
+                            ProgressColor="{AppThemeBinding Light={StaticResource SleepStrokeLight}, Dark={StaticResource SleepStrokeDark}}"
+                            ProgressLeftColor="{AppThemeBinding Light={StaticResource SleepSpaceLight}, Dark={StaticResource SleepSpaceDark}}"
+                            TextColor="{AppThemeBinding Light={StaticResource SleepTextLight}, Dark={StaticResource SleepTextDark}}"
                             Margin="0,25,0,0" />
                         <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" Padding="5">
                             <Label Grid.Row="0" VerticalOptions="Center" Text="Hours of Sleep" />
@@ -62,15 +56,9 @@
                 </Border>
 
                 
-                <Border Background="LightGray" Padding="10">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
+                <Border Background="{AppThemeBinding Light={StaticResource SleepSurfaceLight}, Dark={StaticResource SleepSurfaceDark}}" Style="{StaticResource CardStyle}">
                     <VerticalStackLayout>
-                        <Border Stroke="DarkOrchid"
+                        <Border Stroke="{AppThemeBinding Light={StaticResource SleepStrokeLight}, Dark={StaticResource SleepStrokeDark}}"
                                 StrokeThickness="4"
                                 Padding="5" Margin="0,10">
                             <Grid RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*" Margin="10,5">
@@ -82,7 +70,7 @@
                                 <Label Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center"
                                     Text="Hours of Sleep" />
                                 <Label Grid.Row="2" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"
-                                    Text="{Binding CurrentDay.SleepHours, StringFormat='{}{0:%h}h {0:%m}m', FallbackValue='__h __m'}"/>
+                                    Text="{Binding CurrentDay.SleepHours, StringFormat='{}{0:%h}h {0:%m}m', FallbackValue='h m'}"/>
                                 <Label Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Center"
                                     Text="Bed Time" />
                                 <Label Grid.Row="3" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"

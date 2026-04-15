@@ -15,6 +15,10 @@ public partial class ExerciseGuideViewModel : TrackerPageViewModelBase<ExerciseD
         Enum.GetValues<ExerciseIntensity>().Cast<ExerciseIntensity>().ToList();
     
     #region Exercise Plan Draft Properties
+
+    private int exercisePlanId;
+    public int ExercisePlanId { get => exercisePlanId; set { if (exercisePlanId != value) { exercisePlanId = value; OnPropertyChanged(); } } }
+
     private string? _titleDraft = "";
     public string? TitleDraft { get => _titleDraft; set { _titleDraft = value; OnPropertyChanged(); } }
 
@@ -76,25 +80,7 @@ public partial class ExerciseGuideViewModel : TrackerPageViewModelBase<ExerciseD
     }
     #endregion
 
-
     public string ExerciseGuideMessage => "Select an exercise plan. Then go to the calendar and pick a date. Schedule or record your exercise progress using the controls.";
-    public string CurrentDayWalkingMinutes => CurrentDay?.WalkingMinutes.ToString() ?? "No Record";
-    public string CurrentDayModerateMinutes => CurrentDay?.ModerateMinutes.ToString() ?? "No Record";
-    public string CurrentDayVigorousMinutes => CurrentDay?.VigorousMinutes.ToString() ?? "No Record";
-
-    private int exercisePlanId;
-    public int ExercisePlanId
-    {
-        get { return exercisePlanId; }
-        set
-        {
-            if (exercisePlanId != value)
-            {
-                exercisePlanId = value;
-                OnPropertyChanged();
-            }
-        }
-    }
 
     public ICommand SavePlanCommand { get; }
     public ICommand ClearPlanCommand { get; }

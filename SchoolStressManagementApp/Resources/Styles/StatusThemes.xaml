@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="CardStyle" TargetType="Border">
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="10"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Color x:Key="GeneralSurfaceLight">GhostWhite</Color>
+    <Color x:Key="GeneralSurfaceDark">#404040</Color>
+
+    <!-- HYDRATION THEME -->
+    <Color x:Key="HydrationPrimaryLight">#4FC3F7</Color>
+    <Color x:Key="HydrationSurfaceLight">#E1F5FE</Color>
+    <Color x:Key="HydrationStrokeLight">#30B4FA</Color>
+    <Color x:Key="HydrationTextLight">#002996</Color>
+    <Color x:Key="HydrationSpaceLight">#84ACE6</Color>
+
+    <Color x:Key="HydrationPrimaryDark">#69B6F6</Color>
+    <Color x:Key="HydrationSurfaceDark">#0D1B24</Color>
+    <Color x:Key="HydrationStrokeDark">#5094EA</Color>
+    <Color x:Key="HydrationTextDark">#99ECFF</Color>
+    <Color x:Key="HydrationSpaceDark">#242B56</Color>
+
+    <!-- SLEEP THEME -->
+    <Color x:Key="SleepPrimaryLight">#6525ED</Color>
+    <Color x:Key="SleepSurfaceLight">#F3E5F5</Color>
+    <Color x:Key="SleepStrokeLight">#8500FD</Color>
+    <Color x:Key="SleepTextLight">#290089</Color>
+    <Color x:Key="SleepSpaceLight">#A39FDC</Color>
+
+    <Color x:Key="SleepPrimaryDark">#7E47E2</Color>
+    <Color x:Key="SleepSurfaceDark">#1A1325</Color>
+    <Color x:Key="SleepStrokeDark">#616DC4</Color>
+    <Color x:Key="SleepTextDark">#D3CFE8</Color>
+    <Color x:Key="SleepSpaceDark">#462A65</Color>
+
+    <!-- EXERCISE THEME -->
+    <Color x:Key="ExercisePrimaryLight">#FBC02D</Color>
+    <Color x:Key="ExerciseSurfaceLight">#FFF8E1</Color>
+    <Color x:Key="ExerciseStrokeLight">#EFD062</Color>
+    <Color x:Key="ExerciseTextLight">#AF5B00</Color>
+    <Color x:Key="ExerciseSpaceLight">#CAC891</Color>
+
+    <Color x:Key="ExercisePrimaryDark">#FDE895</Color>
+    <Color x:Key="ExerciseSurfaceDark">#1F1A00</Color>
+    <Color x:Key="ExerciseStrokeDark">#959500</Color>
+    <Color x:Key="ExerciseTextDark">#F3DAB1</Color>
+    <Color x:Key="ExerciseSpaceDark">#4F3A13</Color>
+
+    <!-- OVERVIEW THEME -->
+    <Color x:Key="OverviewPrimaryLight">#50C050</Color>
+    <Color x:Key="OverviewSurfaceLight">#F0FFF0</Color>
+    <Color x:Key="OverviewStrokeLight">#00A000</Color>
+    <Color x:Key="OverviewTextLight">#005030</Color>
+    <Color x:Key="OverviewSpaceLight">#90BE90</Color>
+
+    <Color x:Key="OverviewPrimaryDark">#50C050</Color>
+    <Color x:Key="OverviewSurfaceDark">#001400</Color>
+    <Color x:Key="OverviewStrokeDark">#228222</Color>
+    <Color x:Key="OverviewTextDark">#B0FBB0</Color>
+    <Color x:Key="OverviewSpaceDark">#1F4413</Color>
+</ResourceDictionary>

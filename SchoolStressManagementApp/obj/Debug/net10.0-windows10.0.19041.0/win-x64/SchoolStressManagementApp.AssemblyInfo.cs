@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SchoolStressManagementApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.1+0c5a983ee11a4a3cd06b562bbec554b167ab3457")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.1+5a97f2219ed390807943e955a547488e220b6bfd")]
 [assembly: System.Reflection.AssemblyProductAttribute("SchoolStressManagementApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SchoolStressManagementApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.1.1.0")]

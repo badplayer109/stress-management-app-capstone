@@ -17,15 +17,9 @@
             <VerticalStackLayout Padding="15" Spacing="15">
                 <controls:DefaultFrame />
 
-                    <!-- Exercise Plans Selector -->
-                <Border Background="Beige" Padding="5">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="5" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
-                    <VerticalStackLayout>
+                <!-- Exercise Plans Selector -->
+                <Border Background="{AppThemeBinding Light={StaticResource ExerciseSurfaceLight}, Dark={StaticResource ExerciseSurfaceDark}}" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout Spacing="10">
                         <Button Text="Create and Edit Plans" Command="{Binding ToExercisePlansPageCommand}" />
                         <CollectionView ItemsSource="{Binding Plans}"
                                         SelectionMode="Single"
@@ -34,21 +28,21 @@
                                         MaximumHeightRequest="250">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:ExercisePlanModel">
-                                    <Border Stroke="PaleGoldenrod"
+                                    <Border Stroke="{AppThemeBinding Light={StaticResource ExerciseStrokeLight}, Dark={StaticResource ExerciseStrokeDark}}"
                                             StrokeThickness="4"
                                             Padding="5">
-                                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,2*" Padding="10,0,25,0">
+                                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" Padding="10,0,20,0">
                                             <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" />
                                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding Id}" HorizontalOptions="End" />
                                             <Label Grid.Row="1" Grid.Column="0" Text="{Binding TargetIntensity}" />
-                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding TargetMinutes, StringFormat='Target Time: {0:%h}h {0:%m}m'}" />
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding TargetMinutes, StringFormat='Target: {0:%h}h {0:%m}m'}" HorizontalOptions="End" />
                                             <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding ExerciseLink, StringFormat='Link: {0}', FallbackValue='Link: None'}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                             <CollectionView.EmptyView>
-                                <Border Stroke="LightGray"
+                                <Border Stroke="{AppThemeBinding Light={StaticResource ExerciseSpaceLight}, Dark={StaticResource ExerciseSpaceDark}}"
                                         StrokeThickness="4"
                                         Padding="5">
                                     <Label Text="No exercise plans yet. Create and edit new plans." />
@@ -59,15 +53,9 @@
                     </VerticalStackLayout>
                 </Border>
                 
-                <Border Background="Beige" Padding="10">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
+                <Border Background="{AppThemeBinding Light={StaticResource ExerciseSurfaceLight}, Dark={StaticResource ExerciseSurfaceDark}}" Style="{StaticResource CardStyle}">
                     <VerticalStackLayout>
-                        <Label Text="{Binding ExerciseGuideMessage}" Background="Beige" Margin="5,5,5,0" />
+                        <Label Text="{Binding ExerciseGuideMessage}" Margin="5,5,5,0" />
                         <Label Margin="5,15,5,0"
                             Text="{Binding SelectedPlan.Title, StringFormat='Recording: {0}', FallbackValue='Recording: Select an Exercise Plan'}"
                             FontSize="18" />
@@ -75,13 +63,13 @@
                             Text="{Binding CurrentDay.Date, StringFormat='Recording to: {0:MMMM dd, yyyy}', FallbackValue='Recording to: Select a Date'}"
                             FontSize="18" />
                         <controls:CircularProgressBar x:Name="ExerciseGuideCircularBar"
-                            Value="{Binding Value, Source={x:Reference ExerciseProgressSlider}}"
+                            Value="{Binding ExerciseProgress}"
                             Max="{Binding TargetProgress}"
                             Size="180"
                             Thickness="10"
-                            ProgressColor="Gold"
-                            ProgressLeftColor="PaleGoldenrod"
-                            TextColor="Chocolate" />
+                            ProgressColor="{AppThemeBinding Light={StaticResource ExerciseStrokeLight}, Dark={StaticResource ExerciseStrokeDark}}"
+                            ProgressLeftColor="{AppThemeBinding Light={StaticResource ExerciseSpaceLight}, Dark={StaticResource ExerciseSpaceDark}}"
+                            TextColor="{AppThemeBinding Light={StaticResource ExerciseTextLight}, Dark={StaticResource ExerciseTextDark}}" />
                         
                         <!-- Exercise Day Recorder UI -->
                         <Slider x:Name="ExerciseProgressSlider" Value="{Binding ExerciseProgress}" Maximum="{Binding TargetProgress}" Minimum="0" />
@@ -104,16 +92,10 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Background="Beige" Padding="10">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
+                <Border Background="{AppThemeBinding Light={StaticResource ExerciseSurfaceLight}, Dark={StaticResource ExerciseSurfaceDark}}" Style="{StaticResource CardStyle}">
                     <VerticalStackLayout>
                         <!-- Selected Day Information Display -->
-                        <Border Stroke="Gold"
+                        <Border Stroke="{AppThemeBinding Light={StaticResource ExerciseStrokeLight}, Dark={StaticResource ExerciseStrokeDark}}"
                                 StrokeThickness="4"
                                 Padding="5" Margin="0,20">
                             <Grid RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*">
@@ -142,44 +124,46 @@
                 </Border>
 
                 <!-- Recorded Exercise Plans Display of Day -->
-                <Border Background="Beige" Padding="5">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
-                    <CollectionView ItemsSource="{Binding CurrentDay.RecordedPlans}"
-                                    MinimumHeightRequest="120"
-                                    MaximumHeightRequest="500">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:ExercisePlanModel">
-                                <Border Stroke="PaleGoldenrod"
+                <Border Background="{AppThemeBinding Light={StaticResource ExerciseSurfaceLight}, Dark={StaticResource ExerciseSurfaceDark}}" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Exercise Plans of Chosen Date" FontSize="20" HorizontalOptions="Center" />
+                        <CollectionView ItemsSource="{Binding CurrentDay.RecordedPlans}"
+                                        MinimumHeightRequest="100">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ExercisePlanModel">
+                                    <Border Stroke="{AppThemeBinding Light={StaticResource ExerciseStrokeLight}, Dark={StaticResource ExerciseStrokeDark}}"
+                                            StrokeThickness="4"
+                                            Padding="10,5"
+                                            MaximumWidthRequest="300">
+                                        <VerticalStackLayout Spacing="5">
+                                            <Grid>
+                                                <Label Text="{Binding Title}" Grid.ColumnSpan="2" />
+                                                <Label Text="{Binding Id}" HorizontalOptions="End" />
+                                            </Grid>
+                                            <Label Text="{Binding TargetIntensity}" />
+                                            <Label Text="{Binding ProgressMinutes, StringFormat='Time Done: {0:%h\\h\\ %m\\m}', FallbackValue='Time Done: null'}" />
+                                            <Label Text="{Binding TargetMinutes, StringFormat='Target Time: {0:%h\\h\\ %m\\m}', FallbackValue='Target Time: null'}" />
+                                            <Label Text="{Binding ExerciseLink, StringFormat='{0}', FallbackValue='No Link'}" />
+                                            <Label Text="{Binding Notes, StringFormat='Note: {0}', FallbackValue='Note: Not found'}" />
+                                            <Button Text="Delete" Padding="5" MinimumHeightRequest="0" MinimumWidthRequest="0"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeletePlaninDayCommand}"
+                                                CommandParameter="{Binding}" />
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <CollectionView.EmptyView>
+                                <Border Stroke="{AppThemeBinding Light={StaticResource ExerciseSpaceLight}, Dark={StaticResource ExerciseSpaceDark}}"
                                         StrokeThickness="4"
                                         Padding="5">
-                                    <Grid RowDefinitions="*,*,*,*,*" ColumnDefinitions="100,*,80">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" Grid.ColumnSpan="2" />
-                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Id}" HorizontalOptions="End" Margin="10,0" />
-                                        <Button Grid.Row="0" Grid.Column="3" Text="Delete" Padding="5" MinimumHeightRequest="0" Grid.RowSpan="2"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeletePlaninDayCommand}"
-                                            CommandParameter="{Binding}" />
-                                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding TargetIntensity}" Grid.RowSpan="2" />
-                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding ProgressMinutes, StringFormat='Time Done: {0:%h\\h\\ %m\\m}', FallbackValue='Time Done: null'}" />
-                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding TargetMinutes, StringFormat='Target Time: {0:%h\\h\\ %m\\m}', FallbackValue='Target Time: null'}" />
-                                        <Label Grid.Row="3" Text="{Binding ExerciseLink, StringFormat='Link: {0}', FallbackValue='Link: None'}" Grid.ColumnSpan="2" />
-                                        <Label Grid.Row="4" Text="{Binding Notes, StringFormat='Note: {0}', FallbackValue='Note: None'}" Grid.ColumnSpan="2" />
-                                    </Grid>
+                                    <Label Text="Selected date will show records of exercise logs that were scheduled or already recorded." />
                                 </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                        <CollectionView.EmptyView>
-                            <Border Stroke="LightGray"
-                                        StrokeThickness="4"
-                                        Padding="5">
-                                <Label Text="Selected date will show records of exercise logs that were already recorded." />
-                            </Border>
-                        </CollectionView.EmptyView>
-                    </CollectionView>
+                            </CollectionView.EmptyView>
+                        </CollectionView>
+                    </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>

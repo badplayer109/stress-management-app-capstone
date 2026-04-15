@@ -15,9 +15,28 @@ public partial class MainPageViewModel : INotifyPropertyChanged
     private ObservableCollection<HydrationDayModel> HydrationDays => _status.Data.HydrationDays;
     private ObservableCollection<SleepDayModel> SleepDays => _status.Data.SleepDays;
     private ObservableCollection<ExerciseDayModel> ExerciseDays => _status.Data.ExerciseDays;
-    public HydrationDayModel HydrationStatusToday { get; set; }
-    public SleepDayModel SleepStatusToday { get; set; }
-    public ExerciseDayModel ExerciseStatusToday { get; set; }
+    private HydrationDayModel hydrationStatusToday = new() { WaterIntake = 0 };
+    private SleepDayModel sleepStatusToday = new() { SleepHours=TimeSpan.FromMinutes(0) };
+    private ExerciseDayModel exerciseStatusToday =  new();
+    public HydrationDayModel HydrationStatusToday { get => hydrationStatusToday; set { if (hydrationStatusToday != value) { hydrationStatusToday = value; OnPropertyChanged(); } } }
+    public SleepDayModel SleepStatusToday { get => sleepStatusToday; set { if (sleepStatusToday != value) { sleepStatusToday = value; OnPropertyChanged(); } } }
+    public ExerciseDayModel ExerciseStatusToday { get => exerciseStatusToday; set { if (exerciseStatusToday != value) { exerciseStatusToday = value; OnPropertyChanged(); } } }
+
+    private DateTime? _selectedDate;
+
+    public DateTime? SelectedDate
+    {
+        get => _selectedDate;
+        set
+        {
+            if (_selectedDate != value)
+            {
+                _selectedDate = value;
+                OnPropertyChanged();
+                UpdateJournalDays();
+            }
+        }
+    }
 
     private double totalExerciseProgress = 0;
     public double TotalExerciseProgress
@@ -67,14 +86,9 @@ public partial class MainPageViewModel : INotifyPropertyChanged
         ToSleepStatusPageCommand = new Command(async () => await ToSleepStatusPage());
         ToExerciseGuidePageCommand = new Command(async () => await ToExerciseGuidePage());
 
-        HydrationStatusToday = HydrationDays.FirstOrDefault(h => h.Date.Date == DateTime.Now.Date) ?? new() { WaterIntake=0 };
-
-        SleepStatusToday = SleepDays.FirstOrDefault(s => s.Date.Date == DateTime.Now.Date) ?? new() { SleepHours=TimeSpan.FromMinutes(0) };
-
-        ExerciseStatusToday = ExerciseDays.FirstOrDefault(e => e.Date.Date == DateTime.Now.Date) ?? new();
-
-        CalculateStatusOverview();
+        SelectedDate = DateTime.Now.Date;
     }
+
     public void UpdateTotalProgress()
     {
         TotalExerciseProgress = ExerciseStatusToday.GetExerciseProgress() * 100;
@@ -95,6 +109,16 @@ public partial class MainPageViewModel : INotifyPropertyChanged
 
         double statusOverview = (waterStatus + sleepStatus + exerciseStatus) / 3 * 100;
         StatusOverview = (int)Math.Round(statusOverview, MidpointRounding.AwayFromZero);
+    }
+
+    private void UpdateJournalDays()
+    {
+        if (SelectedDate == null) return;
+        HydrationStatusToday = HydrationDays.FirstOrDefault(h => h.Date.Date == SelectedDate.Value.Date) ?? new() { WaterIntake = 0 };
+        SleepStatusToday = SleepDays.FirstOrDefault(s => s.Date.Date == SelectedDate.Value.Date) ?? new() { SleepHours = TimeSpan.FromMinutes(0) };
+        ExerciseStatusToday = ExerciseDays.FirstOrDefault(e => e.Date.Date == SelectedDate.Value.Date) ?? new();
+
+        CalculateStatusOverview();
     }
 
     private async Task ToHydrationStatusPage()

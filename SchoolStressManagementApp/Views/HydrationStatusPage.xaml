@@ -16,13 +16,7 @@
         <ScrollView>
             <VerticalStackLayout Padding="15" Spacing="25">
                 <controls:DefaultFrame />
-                <Border Background="AliceBlue" Padding="15">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
+                <Border Padding="15" Background="{AppThemeBinding Light={StaticResource HydrationSurfaceLight}, Dark={StaticResource HydrationSurfaceDark}}" Style="{StaticResource CardStyle}">
                     <VerticalStackLayout>
                         <Label Text="Hydration Status Control Panel" FontSize="25" HorizontalOptions="Center" />
                         <Label Margin="0,25,0,10" FontSize="20"
@@ -33,9 +27,9 @@
                             Value="{Binding WaterIntakeDraft}"
                             Size="180"
                             Thickness="10"
-                            ProgressColor="DeepSkyBlue"
-                            ProgressLeftColor="LightSkyBlue"
-                            TextColor="MidnightBlue" />
+                            ProgressColor="{AppThemeBinding Light={StaticResource HydrationStrokeLight}, Dark={StaticResource HydrationStrokeDark}}"
+                            ProgressLeftColor="{AppThemeBinding Light={StaticResource HydrationSpaceLight}, Dark={StaticResource HydrationSpaceDark}}"
+                            TextColor="{AppThemeBinding Light={StaticResource HydrationTextLight}, Dark={StaticResource HydrationTextDark}}" />
                         <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*">
                             <Label Text="Water Drank" Grid.Row="0" VerticalOptions="Center"/>
                             <Entry Text="{Binding WaterIntakeDraftText, Mode=TwoWay}"
@@ -53,15 +47,9 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Background="AliceBlue" Padding="10">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Gray" Offset="5,5" Radius="10" Opacity="0.2" />
-                </Border.Shadow>
+                <Border Background="{AppThemeBinding Light={StaticResource HydrationSurfaceLight}, Dark={StaticResource HydrationSurfaceDark}}" Style="{StaticResource CardStyle}">
                     <VerticalStackLayout>
-                        <Border Stroke="PaleGoldenrod"
+                        <Border Stroke="{AppThemeBinding Light={StaticResource HydrationStrokeLight}, Dark={StaticResource HydrationStrokeDark}}"
                                 StrokeThickness="4"
                                 Padding="5" Margin="0,10">
                             <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" Margin="10,5">

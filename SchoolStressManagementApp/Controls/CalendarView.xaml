@@ -3,13 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SchoolStressManagementApp.ViewModels"
              xmlns:models="clr-namespace:SchoolStressManagementApp.Models"
-             x:Class="SchoolStressManagementApp.Controls.CalendarView">
-    <ContentView.BindingContext>
-        <viewModels:CalendarViewModel/>
-    </ContentView.BindingContext>
-
+             x:Class="SchoolStressManagementApp.Controls.CalendarView"
+             x:DataType="viewModels:CalendarViewModel">
     <VerticalStackLayout>
-
         <Grid ColumnDefinitions="*,*,*" Padding="10,0">
             <Button ImageSource="right_arrow_button.png"
                     Rotation="180"
@@ -38,27 +34,29 @@
         <CollectionView ItemsSource="{Binding Weeks}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:CalendarWeek">
-
                     <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Days}" HorizontalOptions="Center" Padding="4">
-
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="models:CalendarDay">
-
                                 <Button Text="{Binding Day}"
-                                        BackgroundColor="{Binding ColorSelected}"
                                         Margin="3"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=BindingContext.SelectDayCommand}"
-                                        CommandParameter="{Binding}" />
-
+                                        CommandParameter="{Binding}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                                            <Style.Triggers>
+                                                <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#B4B41E, Dark=Yellow}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                             </DataTemplate>
-
                         </BindableLayout.ItemTemplate>
-
                     </HorizontalStackLayout>
-
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
     </VerticalStackLayout>
 </ContentView>
